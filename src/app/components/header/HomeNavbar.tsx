@@ -2,10 +2,10 @@ import { Box, Button, Container, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 export function HomeNavbar() {
-    const authMember = true
+    const authMember = null
     return (
         <div className="home-navbar">
-            <Container className="home-container">
+            <Container className="navbar-container">
                 <Stack className="menu" >
                     <Box>
                         <NavLink to="/">
@@ -52,27 +52,29 @@ export function HomeNavbar() {
 
                     </Stack>
                 </Stack>
-
-                <div className="navbar-container" >
-                    <div className="header-frame">
-                        <div className="main-txt">
+                <Stack className="header-frame">
+                    <Stack className="detail">
+                        <Box className="head-main-txt">
                             World's Most Delicious Cousine
-                        </div>
-                        <div className="wel-txt">
+                        </Box>
+                        <Box className="wel-txt">
                             The Choice, not just a choice
-                        </div>
-                        <div className="service-txt">
+                        </Box>
+                        <Box className="service-txt">
                             24 hours service
-                        </div>
-                        <div className="signup-contain">
-                            <button className="signup-button">SIGN UP</button>
-                        </div>
-                    </div>
+                        </Box>
 
-                    <div className="logo-frame">
+                        <Box className={"signup"}>
+                            {!authMember ? (
+                                <Button variant="contained" className="signup-button">SIGN UP</Button>
+                            ) : null}
+                        </Box>
+
+                    </Stack>
+                    <Box className="logo-frame">
                         <div className="logo-img"></div>
-                    </div>
-                </div>
+                    </Box>
+                </Stack>
             </Container>
         </div>
     );

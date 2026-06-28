@@ -1,9 +1,4 @@
-import React from "react";
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
-import { RippleBadge } from "./MaterialTheme/styled";
-import { Switch, Link, Route, useLocation } from "react-router-dom";
-import { About } from "./screens/About";
-import { Users } from "./screens/Users";
+import { Switch, Route, useLocation } from "react-router-dom";
 import { HomePage } from "./screens/homePage";
 import { ProductsPage } from "./screens/productsPage";
 import { UserPage } from "./screens/userPage";
