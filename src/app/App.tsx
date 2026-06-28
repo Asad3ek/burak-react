@@ -14,32 +14,33 @@ import { Footer } from "./components/footer";
 import { HelpPage } from "./screens/helpPage";
 import "../css/app.css";
 import "../css/navbar.css";
+import "../css/footer.css";
 
 function App() {
   const location = useLocation();
 
   return (
     <>
-      {location.pathname === "/" ? <HomeNavbar/> : <OtherNavbar/>}
-      
-        <Switch>
-          <Route path="/products">
-            <ProductsPage />
-          </Route>
-          <Route path="/orders">
-            <OrdersPage />
-          </Route>
-          <Route path="/member-page">
-            <UserPage />
-          </Route>
-          <Route path="/help">
-            <HelpPage />
-          </Route>
-          <Route path="/">
-            <HomePage />
-          </Route>
-        </Switch>
-        <Footer />
+      {location.pathname === "/" ? <HomeNavbar /> : <OtherNavbar />}
+
+      <Switch>
+        <Route path="/products">
+          <ProductsPage />
+        </Route>
+        <Route path="/orders">
+          <OrdersPage />
+        </Route>
+        <Route path="/member-page">
+          <UserPage />
+        </Route>
+        <Route path="/help">
+          <HelpPage />
+        </Route>
+        <Route path="/">
+          <HomePage />
+        </Route>
+      </Switch>
+      <Footer />
     </>
   );
 }

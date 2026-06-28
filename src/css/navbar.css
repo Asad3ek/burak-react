@@ -37,3 +37,94 @@
 .home-navbar div.hover-line:after {
     transform-origin: 0% 50%;
 }
+
+.home-navbar .navbar-container {
+    display: flex;
+    flex-direction: row;
+    height: 642px;
+    margin-top: 55px;
+    margin-top: 142px;
+
+}
+
+.home-navbar .navbar-container .header-frame {
+    display: flex;
+    flex-direction: column;
+    width: 510px;
+    height: 462px;
+}
+
+
+.home-navbar .navbar-container .header-frame .main-txt {
+    color: #f8f8ff;
+    font-family: "Roboto Serif";
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 500;
+    height: 150px;
+    letter-spacing: -.75px;
+    line-height: normal;
+    width: 450px;
+    align-items: flex-start;
+}
+
+.home-navbar .navbar-container .header-frame .wel-txt {
+    color: #d7b686;
+    font-family: "Roboto Serif";
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    height: 42px;
+    letter-spacing: -.54px;
+    line-height: normal;
+    width: 510px;
+    padding: 0px;
+}
+
+.home-navbar .navbar-container .header-frame .service-txt {
+    color: #d5d5d5;
+    font-family: "Roboto Serif";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    height: 23px;
+    letter-spacing: -.3px;
+    line-height: normal;
+    margin-top: 23px;
+    width: 153px;
+}
+
+.home-navbar .navbar-container .header-frame .signup-contain {
+    margin-top: 73px;
+}
+
+.home-navbar .navbar-container .header-frame .signup-contain .signup-button {
+    background: #1976d2;
+    border: none;
+    border-radius: 7px;
+    color: #f8f8ff;
+    font-family: Poppins;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 400;
+    height: 60px;
+    line-height: normal;
+    text-align: center;
+    width: 210px;
+}
+
+.home-navbar .navbar-container .logo-frame {
+    height: 419px;
+    margin-top: 43px;
+    width: 690px;
+}
+
+.home-navbar .navbar-container .logo-frame .logo-img {
+    background: url("/public/img/logo.webp");
+    background-repeat: no-repeat;
+    background-size: contain;
+    filter: invert(25%);
+    height: 100%;
+    width: 100%;
+    border: none;
+}
