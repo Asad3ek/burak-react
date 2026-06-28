@@ -1,80 +1,88 @@
-export function Footer() {
-    return (
-        <div className="footer">
-            <div className="footer-container">
-                <div className="footer-left">
-                    <div>
-                        <img style={{ width: "100px" }} src="/icons/burak.svg" alt="" />
-                    </div>
-                    <div className="foot-desc-txt">
-                        Focusing on the gourmet Turkish breakfast as well
-                        as the youth society, ZEN Bumarak Gurme aims to bring
-                        Turkish cuisine back. ZEN Bumarak Gurme creates an
-                        illusion with its cuisine.
-                    </div>
-                    <div className="social-icons">
-                        <a href="">
-                            <img src="/icons/facebook.svg" alt="" />
-                        </a>
-                        <a href="">
-                            <img src="/icons/twitter.svg" alt="" />
-                        </a>
-                        <a href="">
-                            <img src="/icons/instagram.svg" alt="" />
-                        </a>
-                        <a href="">
-                            <img src="/icons/youtube.svg" alt="" />
-                        </a>
-                    </div>
-                </div>
+import React from "react";
+import { Box, Container, Stack } from "@mui/material";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
-                <div className="footer-right">
-                    <div className="footer-inner-left">
-                        <div className="footer-category-title">Pages</div>
-                        <div className="foot-category-link">
-                            <a href="">Home</a>
-                        </div>
-                        <div className="foot-category-link">
-                            <a href="">Products</a>
-                        </div>
-                        <div className="foot-category-link">
-                            <a href="">Help</a>
-                        </div>
-                    </div>
+const Footers = styled.div`
+  width: 100%;
+  height: 590px;
+  display: flex;
+  background: #343434;
+  background-size: cover;
+`;
 
-                    <div className="footer-inner-right">
-                        <div className="footer-category-title">Find Us</div>
+export default function Footer() {
+  const authMember = null;
 
-                        <div className="findUs-contain">
-                            <div className="find-us">
-                                <span>L.</span>
-                                <div >Downtown, Dubai</div>
-                            </div>
+  return (
+    <Footers>
+      <Container>
+        <Stack sx={{ mt: "94px", flexDirection: "row" }}>
+          <Stack style={{ width: "340px", flexDirection: "column" }}>
+            <Box>
+              <img width={"100px"} src={"/icons/burak.svg"} />
+            </Box>
+            <Box className={"foot-desc-txt"}>
+              Focusing on the gourmet Turkish breakfast as well as the youth
+              society, CZN Burak Gurme aims to bring Turkish cuisine back. CZN
+              Burak Gurme creates an illusion with its cuisine.
+            </Box>
+            <Box className="sns-context">
+              <img src={"/icons/facebook.svg"} />
+              <img src={"/icons/twitter.svg"} />
+              <img src={"/icons/instagram.svg"} />
+              <img src={"/icons/youtube.svg"} />
+            </Box>
+          </Stack>
+          <Stack sx={{ ml: "288px", flexDirection: "row" }}>
+            <Stack>
+              <Box>
+                <Box className={"foot-category-title"}>Bo'limlar</Box>
+                <Box className={"foot-category-link"}>
+                  <Link to="/">Home</Link>
+                  <Link to="/products">Products</Link>
+                  {authMember && <Link to="/orders">Orders</Link>}
+                  <Link to="/help">Help</Link>
+                </Box>
+              </Box>
+            </Stack>
+            <Stack sx={{ ml: "100px" }}>
+              <Box>
+                <Box className={"foot-category-title"}>Find us</Box>
+                <Box
+                  sx={{ mt: "20px", flexDirection: "column", justifyContent: "space-between" }}
+                  className={"foot-category-link"}
 
-                            <div className="find-us">
-                                <span>P.</span>
-                                <div>+971 4 554 7777</div>
-                            </div>
-
-                            <div className="find-us">
-                                <span>E.</span>
-                                <div>devexuz@gmail.com</div>
-                            </div>
-
-                            <div className="find-us">
-                                <span>H.</span>
-                                <div>Visit 24 hours</div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div className="line-contain">
-                <div className="footer-line"></div>
-            </div>
-        </div>
-    );
-
-
+                >
+                  <Box sx={{ flexDirection: "row" }} className={"find-us"}>
+                    <span>L.</span>
+                    <div>Downtown, Dubai</div>
+                  </Box>
+                  <Box className={"find-us"}>
+                    <span>P.</span>
+                    <div>+971 4 554 7777</div>
+                  </Box>
+                  <Box className={"find-us"}>
+                    <span>E.</span>
+                    <div>devexuz@gmail.com</div>
+                  </Box>
+                  <Box className={"find-us"}>
+                    <span>H.</span>
+                    <div>Visit 24 hours</div>
+                  </Box>
+                </Box>
+              </Box>
+            </Stack>
+          </Stack>
+        </Stack>
+        <Stack
+          style={{ border: "1px solid #C5C8C9", width: "100%", opacity: "0.2" }}
+          sx={{ mt: "80px" }}
+        ></Stack>
+        <Stack className={"copyright-txt"}>
+          © Copyright Devex Global, All rights reserved.
+        </Stack>
+      </Container>
+    </Footers>
+  );
 }
