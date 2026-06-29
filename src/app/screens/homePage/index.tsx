@@ -9,7 +9,7 @@ import Events from "./Events";
 
 export default function HomePage() {
   return (
-    <div>
+    <div className="homePage">
       <Statistics />
       <PopularDishes />
       <NewDishes />
