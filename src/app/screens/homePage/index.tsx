@@ -7,6 +7,7 @@ import Advertiesment from "./Advertiesment";
 import ActiveUsers from "./ActiveUsers";
 import Events from "./Events";
 
+
 export default function HomePage() {
   return (
     <div className="homePage">
