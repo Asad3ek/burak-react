@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 export default function HomeNavbar() {
     const authMember = null;
     const [count, setCount] = useState<number>(0);
-    const [value, setValue] = useState<boolean>(true);
+    const [result, setValue] = useState<any>(true);
 
 
     useEffect(() => {
@@ -17,13 +17,13 @@ export default function HomeNavbar() {
             console.log("componentWillUnmount")
         };
 
-    }, [value]);
+    }, [result.value]);
 
 
     /** HANDLERS **/
 
     const buttonHandler = () => {
-        setValue(!value);
+        setValue(!result.value);
     }
 
     return (
