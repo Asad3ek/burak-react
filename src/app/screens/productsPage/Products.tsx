@@ -20,6 +20,7 @@ import { ProductCollection } from "../../../lib/enums/product.enum";
 import { serverApi } from "../../../lib/config";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { cardItem } from "../../../lib/types/search";
 
 /** REDUX SLICE **/
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -32,9 +33,13 @@ const productsRetriver = createSelector(
     (products) => ({ products })
 );
 
+interface ProductsProps {
+    onAdd: (item: cardItem) => void
+}
 
 
-export default function Products() {
+export default function Products(props: ProductsProps) {
+    const { onAdd } = props;
     const { setProducts } = actionDispatch(useDispatch());
     const { products } = useSelector(productsRetriver);
 
@@ -217,13 +222,26 @@ export default function Products() {
                                                 sx={{ backgroundImage: `url(${imagePath})` }}
                                             >
                                                 <div className={"product-sale"}>{sizeVolume}</div>
-                                                <Button className={"shop-btn"}>
+                                                <Button
+                                                    className={"shop-btn"}
+                                                    onClick={(e) => {
+                                                        onAdd({
+                                                            _id: product._id,
+                                                            quantity: 1,
+                                                            name: product.productName,
+                                                            price: product.productPrice,
+                                                            image: product.productImages[0]
+                                                        })
+                                                        e.stopPropagation();
+                                                    }}
+                                                >
                                                     <img
                                                         src={"/icons/shopping-cart.svg"}
                                                         style={{ display: "flex" }}
                                                     />
                                                 </Button>
-                                                <Button className={"view-btn"} sx={{ right: "36px" }}>
+                                                <Button
+                                                    className={"view-btn"} sx={{ right: "36px" }}>
                                                     <Badge badgeContent={product.productViews} color="secondary">
                                                         <RemoveRedEyeIcon
                                                             sx={{

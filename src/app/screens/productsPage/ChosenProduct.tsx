@@ -23,6 +23,7 @@ import ProductService from "../../services/ProductService";
 import MemberService from "../../services/MemberService";
 import { MemberStatus } from "../../../lib/enums/member.enum";
 import { serverApi } from "../../../lib/config";
+import { cardItem } from "../../../lib/types/search";
 
 /** REDUX SLICE **/
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -41,12 +42,17 @@ const chosenProductRetriver = createSelector(
   (chosenProduct) => ({ chosenProduct })
 );
 
-export default function ChosenProduct() {
+interface ChosenPageProps {
+  onAdd: (item: cardItem) => void
+}
+
+export default function ChosenProduct(props: ChosenPageProps) {
 
   const { productId } = useParams<{ productId: string }>()
   const { setRestaurant, setChosenProduct } = actionDispatch(useDispatch());
   const { chosenProduct } = useSelector(chosenProductRetriver);
   const { restaurant } = useSelector(restaurantRetriver);
+  const { onAdd } = props;
 
   useEffect(() => {
     const product = new ProductService();
