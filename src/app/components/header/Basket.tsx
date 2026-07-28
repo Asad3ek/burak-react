@@ -8,16 +8,27 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useHistory } from "react-router-dom";
 import { cardItem } from "../../../lib/types/search";
 import { serverApi } from "../../../lib/config";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 interface BasketProps {
   cardItems: cardItem[];
+  onAdd: (item: cardItem) => void;
+  onRemove: (item: cardItem) => void;
+  onDelete: (item: cardItem) => void;
+  onDeleteAll: () => void;
 }
 
 export default function Basket(props: BasketProps) {
 
-  const { cardItems } = props;
+  const { cardItems, onAdd, onRemove, onDelete, onDeleteAll } = props;
   const authMember = null;
   const history = useHistory();
+  const itemPrice = cardItems.reduce(
+    (a: number, c: cardItem) =>
+      a + c.quantity * c.price, 0
+  );
+  const shippingCost: number = itemPrice < 100 ? 5 : 0;
+  const totallPrice = (itemPrice + shippingCost).toFixed(1)
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -83,7 +94,18 @@ export default function Basket(props: BasketProps) {
           <Box className={"all-check-box"}>
             {cardItems.length === 0
               ? (<div>Cart is empty!</div>)
-              : (<div>Cart Products!</div>)
+              : (
+                <Stack flexDirection={"row"}>
+                  <div>Cart Products!</div>
+                  <DeleteForeverIcon
+                    sx={{ ml: "10px", cursor: "pointer" }}
+                    color={"primary"}
+                    onClick={() => onDeleteAll()}
+                  />
+
+                </Stack>
+
+              )
             }
           </Box>
 
@@ -95,15 +117,15 @@ export default function Basket(props: BasketProps) {
                 return (
                   <Box className={"basket-info-box"}>
                     <div className={"cancel-btn"}>
-                      <CancelIcon color={"primary"} />
+                      <CancelIcon color={"primary"} onClick={() => onDelete(item)} />
                     </div>
                     <img src={imagePath} className={"product-img"} />
                     <span className={"product-name"}>{item.name}</span>
                     <p className={"product-price"}>${item.price} x {item.quantity}</p>
                     <Box sx={{ minWidth: 120 }}>
                       <div className="col-2">
-                        <button className="remove">-</button>{" "}
-                        <button className="add">+</button>
+                        <button className="remove" onClick={() => onRemove(item)} >-</button>{" "}
+                        <button className="add" onClick={() => onAdd(item)} >+</button>
                       </div>
                     </Box>
                   </Box>
@@ -114,13 +136,19 @@ export default function Basket(props: BasketProps) {
 
             </Box>
           </Box>
-          <Box className={"basket-order"}>
-            <span className={"price"}>Total: $100 (98 +2)</span>
-            <Button startIcon={<ShoppingCartIcon />} variant={"contained"}>
-              Order
-            </Button>
-          </Box>
+          {cardItems.length !== 0 ? (
+            <Box className={"basket-order"}>
+              <span className={"price"}>Total: ${totallPrice} ({itemPrice} + {shippingCost})</span>
+              <Button startIcon={<ShoppingCartIcon />} variant={"contained"}>
+                Order
+              </Button>
+            </Box>
+          ) : (
+            ""
+
+          )}
         </Stack>
+
       </Menu>
     </Box>
   );

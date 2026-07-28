@@ -12,38 +12,41 @@ import "../css/navbar.css";
 import "../css/footer.css";
 import "../css/home.css"
 import Test from "./screens/Test";
+import useBasket from "./components/hooks/useBasket";
 import { useState } from "react";
-import { cardItem } from "../lib/types/search";
+import AuthenticationModal from "./components/auth";
+
+
 
 
 function App() {
   const location = useLocation();
-  const cardJson: string | null = localStorage.getItem("cardData");
-  const currentCard = cardJson ? JSON.parse(cardJson) : []
-  const [cardItems, setCardItems] = useState<cardItem[]>(currentCard);
+  const { cardItems, onAdd, onRemove, onDelete, onDeleteAll } = useBasket()
+  const [signupOpen, setSignUpOpen] = useState<boolean>(false);
+  const [loginOpen, setLoginOpen] = useState<boolean>(false);
 
-  // Handlers: 
-  const onAdd = (input: cardItem) => {
-    const exist: any = cardItems.find((item: cardItem) => item._id === input._id);
-    if (exist) {
-      const cardUpdate = cardItems.map((item: cardItem) =>
-        item._id === input._id
-          ? { ...exist, quantity: exist.quantity + 1 }
-          : item
-      );
-      setCardItems(cardUpdate);
-      localStorage.setItem("cardData", JSON.stringify(cardUpdate));
-    }
-    else {
-      const cardUpdate = [...cardItems, { ...input }];
-      setCardItems(cardUpdate);
-      localStorage.setItem("cardData", JSON.stringify(cardUpdate));
-    }
-  }
+  /** HANDLERS **/
+
+  const handleSignUpClose = () => setSignUpOpen(false);
+  const handleLoginClose = () => setLoginOpen(false);
 
   return (
     <>
-      {location.pathname === "/" ? <HomeNavbar cardItems={cardItems} /> : <OtherNavbar cardItems={cardItems} />}
+      {location.pathname === "/"
+        ? <HomeNavbar
+          cardItems={cardItems}
+          onAdd={onAdd}
+          onRemove={onRemove}
+          onDelete={onDelete}
+          onDeleteAll={onDeleteAll}
+        />
+        : <OtherNavbar
+          cardItems={cardItems}
+          onAdd={onAdd}
+          onRemove={onRemove}
+          onDelete={onDelete}
+          onDeleteAll={onDeleteAll}
+        />}
 
       <Switch>
         <Route path="/products">
@@ -63,6 +66,13 @@ function App() {
         </Route>
       </Switch>
       <Footer />
+
+      <AuthenticationModal
+        signupOpen={signupOpen}
+        loginOpen={loginOpen}
+        handleSignupClose={handleSignUpClose}
+        handleLoginClose={handleLoginClose}
+      />
     </>
   );
 }

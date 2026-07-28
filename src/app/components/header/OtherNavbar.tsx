@@ -5,11 +5,15 @@ import { cardItem } from "../../../lib/types/search";
 
 interface OtherNavbarProps {
     cardItems: cardItem[]
+    onAdd: (item: cardItem) => void
+    onRemove: (item: cardItem) => void
+    onDelete: (item: cardItem) => void
+    onDeleteAll: () => void
 }
 
 export default function OtherNavbar(props: OtherNavbarProps) {
 
-    const { cardItems } = props;
+    const { cardItems, onAdd, onRemove, onDelete, onDeleteAll } = props;
     const authMember = null;
 
     return <div className="other-navbar">
@@ -46,7 +50,13 @@ export default function OtherNavbar(props: OtherNavbarProps) {
                     <Box className={"hover-line"}>
                         <NavLink to="/help" activeClassName={"underline"} >Help</NavLink>
                     </Box>
-                    <Basket cardItems={cardItems} />
+                    <Basket
+                        cardItems={cardItems}
+                        onAdd={onAdd}
+                        onRemove={onRemove}
+                        onDelete={onDelete}
+                        onDeleteAll={onDeleteAll}
+                    />
                     {!authMember ? (
                         <Box>
                             <Button className="login-button" variant="contained">Login</Button>

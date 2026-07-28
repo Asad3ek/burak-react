@@ -6,10 +6,14 @@ import { cardItem } from "../../../lib/types/search";
 
 interface HomeNavbarProps {
     cardItems: cardItem[]
+    onAdd: (item: cardItem) => void
+    onRemove: (item: cardItem) => void
+    onDelete: (item: cardItem) => void
+    onDeleteAll: () => void
 }
 
 export default function HomeNavbar(props: HomeNavbarProps) {
-    const { cardItems } = props;
+    const { cardItems, onAdd, onRemove, onDelete, onDeleteAll } = props;
     const authMember = null;
     const [count, setCount] = useState<number>(0);
     const [value, setValue] = useState<boolean>(true);
@@ -67,7 +71,13 @@ export default function HomeNavbar(props: HomeNavbarProps) {
                         <Box className={"hover-line"}>
                             <NavLink to="/help" activeClassName={"underline"} >Help</NavLink>
                         </Box>
-                        <Basket cardItems={cardItems} />
+                        <Basket
+                            cardItems={cardItems}
+                            onAdd={onAdd}
+                            onRemove={onRemove}
+                            onDelete={onDelete}
+                            onDeleteAll={onDeleteAll}
+                        />
 
                         {!authMember ? (
                             <Box>
@@ -91,7 +101,7 @@ export default function HomeNavbar(props: HomeNavbarProps) {
                             The Choice, not just a choice
                         </Box>
                         <Box className="service-txt">
-                            {count} hours service
+                            24 hours service
                         </Box>
 
                         <Box className={"signup"}>
