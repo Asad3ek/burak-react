@@ -10,31 +10,13 @@ interface HomeNavbarProps {
     onRemove: (item: cardItem) => void
     onDelete: (item: cardItem) => void
     onDeleteAll: () => void
+    setSignUpOpen: (isOpen: boolean) => void
+    setLoginOpen: (isOpen: boolean) => void
 }
 
 export default function HomeNavbar(props: HomeNavbarProps) {
-    const { cardItems, onAdd, onRemove, onDelete, onDeleteAll } = props;
+    const { cardItems, onAdd, onRemove, onDelete, onDeleteAll, setSignUpOpen, setLoginOpen } = props;
     const authMember = null;
-    const [count, setCount] = useState<number>(0);
-    const [value, setValue] = useState<boolean>(true);
-
-
-    useEffect(() => {
-        console.log("componentDidMount"); // DATA FETCH
-        setCount(count + 1);
-
-        return () => {
-            console.log("componentWillUnmount")
-        };
-
-    }, [value]);
-
-
-    /** HANDLERS **/
-
-    const buttonHandler = () => {
-        setValue(!value);
-    }
 
     return (
         <div className="home-navbar">
@@ -81,7 +63,13 @@ export default function HomeNavbar(props: HomeNavbarProps) {
 
                         {!authMember ? (
                             <Box>
-                                <Button className="login-button" variant="contained">Login</Button>
+                                <Button
+                                    className="login-button"
+                                    variant="contained"
+                                    onClick={() => setLoginOpen(true)}
+                                >
+                                    Login
+                                </Button>
                             </Box>
                         ) : (
                             <img
@@ -106,7 +94,13 @@ export default function HomeNavbar(props: HomeNavbarProps) {
 
                         <Box className={"signup"}>
                             {!authMember ? (
-                                <Button variant="contained" className="signup-button" onClick={buttonHandler}>SIGN UP</Button>
+                                <Button
+                                    variant="contained"
+                                    className="signup-button"
+                                    onClick={() => setSignUpOpen(true)}
+                                >
+                                    SIGN UP
+                                </Button>
                             ) : null}
                         </Box>
 

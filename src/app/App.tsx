@@ -39,6 +39,8 @@ function App() {
           onRemove={onRemove}
           onDelete={onDelete}
           onDeleteAll={onDeleteAll}
+          setSignUpOpen={setSignUpOpen}
+          setLoginOpen={setLoginOpen}
         />
         : <OtherNavbar
           cardItems={cardItems}
@@ -46,6 +48,8 @@ function App() {
           onRemove={onRemove}
           onDelete={onDelete}
           onDeleteAll={onDeleteAll}
+          setSignUpOpen={setSignUpOpen}
+          setLoginOpen={setLoginOpen}
         />}
 
       <Switch>

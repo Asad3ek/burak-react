@@ -25,7 +25,7 @@ export interface MemberInput {
     memberImage?: string,
     memberAddress?: string,
     memberDesc?: string,
-    memberPoint: number,
+    memberPoint?: number,
 }
 
 export interface LoginInput {
