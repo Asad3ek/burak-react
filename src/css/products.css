@@ -561,11 +561,15 @@
 .products-page .product-category .category-main {
   display: flex;
   flex-direction: row;
-  justify-content: end;
-  transform: rotate(-90deg); /* Standard CSS property */
-  -moz-transform: rotate(-90deg); /* Firefox */
-  -ms-transform: rotate(-90deg); /* Edge */
-  -o-transform: rotate(-90deg); /* Opera */
+  justify-content: flex-end;
+  transform: rotate(-90deg);
+  /* Standard CSS property */
+  -moz-transform: rotate(-90deg);
+  /* Firefox */
+  -ms-transform: rotate(-90deg);
+  /* Edge */
+  -o-transform: rotate(-90deg);
+  /* Opera */
   -webkit-transform: rotate(-90deg);
 }
 
@@ -617,11 +621,7 @@
   height: 1020px;
 }
 
-.products-page
-  .chosen-product
-  .chosen-product-slider
-  .swiper-area
-  .slider-image {
+.products-page .chosen-product .chosen-product-slider .swiper-area .slider-image {
   width: 100%;
   height: 100%;
 }

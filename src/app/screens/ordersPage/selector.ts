@@ -1,19 +1,18 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { AppRootState } from "../../../lib/types/screen";
-import OrdersPage from ".";
 
-const selectOrderPage = (state: AppRootState) => state.orderPage;
+const selectOrdersPage = (state: AppRootState) => state.ordersPage;
 export const retrivePausedOrders = createSelector(
-    selectOrderPage,
+    selectOrdersPage,
     (OrdersPage) => OrdersPage.pausedOrders
 );
 
 export const retriveProcessOrders = createSelector(
-    selectOrderPage,
+    selectOrdersPage,
     (OrdersPage) => OrdersPage.processOrders
 );
 
 export const retriveFinishedOrders = createSelector(
-    selectOrderPage,
+    selectOrdersPage,
     (OrdersPage) => OrdersPage.finishedOrders
 );
