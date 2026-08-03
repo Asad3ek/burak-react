@@ -1,15 +1,18 @@
-import React from "react";
 import { Box, Stack } from "@mui/material";
 import Button from "@mui/material/Button";
 import TabPanel from "@mui/lab/TabPanel";
 import moment from "moment";
-
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { retriveProcessOrders } from "./selector";
-import { Order, OrderItem } from "../../../lib/types/order";
+import { Order, OrderItem, OrderUpdateInput } from "../../../lib/types/order";
 import { Product } from "../../../lib/types/product";
-import { serverApi } from "../../../lib/config";
+import { Messages, serverApi } from "../../../lib/config";
+import { useGlobals } from "../../components/hooks/useGlobals";
+import { T } from "../../../lib/types/common";
+import { OrderStatus } from "../../../lib/enums/order.enum";
+import OrderService from "../../services/OrderService";
+import { sweetErrorHandling } from "../../../lib/sweetAlert";
 
 /** REDUX SELECTOR **/
 
@@ -18,8 +21,38 @@ const processOrderRetriver = createSelector(
   (processOrders) => ({ processOrders })
 );
 
-export default function ProcessOrders() {
-  const { processOrders } = useSelector(processOrderRetriver)
+interface ProcessOrderProps {
+  setValue: (input: string) => void;
+}
+
+export default function ProcessOrders(props: ProcessOrderProps) {
+  const { processOrders } = useSelector(processOrderRetriver);
+  const { authMember, setOrderBuilder } = useGlobals();
+  const { setValue } = props;
+
+  const finishOrderHandler = async (e: T) => {
+    try {
+      if (!authMember) throw new Error(Messages.error2)
+      const orderId = e.target.value;
+      const input: OrderUpdateInput = {
+        orderId: orderId,
+        orderStatus: OrderStatus.FINISH
+      };
+
+      const confirmation = window.confirm("Have you received your order?");
+      if (confirmation) {
+        const order = new OrderService();
+        await order.updateOrder(input);
+        setValue("3");
+        setOrderBuilder(new Date());
+
+      }
+    }
+    catch (err) {
+      console.log(err);
+      sweetErrorHandling(err).then()
+    }
+  }
 
   return (
     <TabPanel value={"2"}>
@@ -71,7 +104,12 @@ export default function ProcessOrders() {
                 <p className={"data-compl"}>
                   {moment().format("YY-MM-DD HH:mm")}
                 </p>
-                <Button variant="contained" className={"verify-button"}>
+                <Button
+                  value={order._id}
+                  variant="contained"
+                  className={"verify-button"}
+                  onClick={finishOrderHandler}
+                >
                   Verify to Fulfil
                 </Button>
               </Box>

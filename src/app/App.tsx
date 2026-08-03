@@ -7,19 +7,17 @@ import HomeNavbar from "./components/header/HomeNavbar";
 import OtherNavbar from "./components/header/OtherNavbar";
 import Footer from "./components/footer";
 import HelpPage from "./screens/helpPage";
-import "../css/app.css";
-import "../css/navbar.css";
-import "../css/footer.css";
-import "../css/home.css"
-import Test from "./screens/Test";
 import useBasket from "./components/hooks/useBasket";
 import { useState } from "react";
 import AuthenticationModal from "./components/auth";
-import { T } from "../lib/types/common";
 import { sweetErrorHandling, sweetTopSuccessAlert } from "../lib/sweetAlert";
 import { Messages } from "../lib/config";
 import MemberService from "./services/MemberService";
 import { useGlobals } from "./components/hooks/useGlobals";
+import "../css/app.css";
+import "../css/navbar.css";
+import "../css/footer.css";
+import "../css/home.css"
 
 
 
